@@ -1,0 +1,44 @@
+df_mancha_ sp              package:unknown                R Documentation
+
+Le arquivos de imagem de extensao .bpm, analisa a dimensao fractal de cada imagem, retorna um dataframe com os valores de dimensao fractal de cada arquivo e a media.
+
+Description:
+A funcao utiliza o metodo de box-couting e realiza analise de dimensao fractal (df) de cada imagem no diretorio carregado. Por fim, retorna os valores de  df de cada imagem e uma media dos mesmos. Para isso a funcao le arquivos .bmp (imagem bitmap) que está no diretorio especificado do computador. As imagens sao no formato .bmp, de tamanho padronizado (5x5cm), em escala de cinza, com resolução de 50 pixels por polegada (para analise com menor tempo de processamento.
+
+Usage:
+
+df_mancha_sp = function(path_folder)
+
+Arguments:
+
+path_folder:  Objeto que contem o caminho (diretorio) onde imagens de extensao .bmp estao armazendas para leitura e analise
+
+Details:
+
+A idenficiação e descricao de padroes de desenho e manchas em anfibios anuros e essencial para a taxonomia alfa e beta. Entretanto as descricoes e analises com dos padroes de mancha ainda sao sujeitos a subjetividade e as mesmas acabam sendo realizadas sem suporte estatistico e/ou numerico quanto a sua forma. A presente funcao possui o objetivo de descrever os padroes de desenho dorsal em anifbios anuros de forma numerica com a utilizacao da metodologia box-couting. O metodo analisa as formas dos objetos que podem estar contidos numa imagem sobre forma que grade de quadrados com lados de tamanho s. A analise tambem pode considerar matrizes de valores, onde numeros indicam as cores armazenadas nos pixels (quadrados). A analise conta o numero de quadrados (N(s)) e repete a contagem para quadrados reticulados de tamanhos s menores do primeiro que foi analisado para obter valores de N de cada. Por fim, a analise monta um grafico com valores logaritmizados de N(s) x log 1s. Uma reta de regressao e obtida para os pontos contados obtidos e o valor de dimensao fractal e obtido pela inclinacao desta reta. Por fim, a analise ira reunir os dados de dimensao fractal das imagens dos especimes analisados e fara uma media dos mesmos armazendo o valor num objeto.
+
+Value:
+A funcao retorna um dataframe com os valores de dimensao fractal de cada imagem analisada (espécime analisado) e a media desses valores.
+
+Warning:
+A funcao necessita dos pacotes bmp e fractaldim, para leitura /transformacao dos arquivos de imagem  de extensao .bmp em matrizes e analise de dimensao fractal pelo metodo box-counting, respectivamente. Para testar a funcao pode-se utilizar imagems padronizadas de extensao .bmp armazenadas em um diretorio especifico. Para uma analise mais rapida e preliminar recomenda-se utilizar com configuracoes de 2,5~10 de largura e 2,5~10cm altura (2,5 x 2,5), escala de cinza e resolucao de 50 pixel por polegada. Nao e recomendado a utilizacao de imagens maiores do que às recomendadas acima.  Caso prefira utilizar imagens maiores, maior poder de processamento sera requisitado bem como o tempo de analise sera maior.
+
+
+Author(s):
+
+Lucas Menezes Silva 
+kiasms@gmail.com
+
+References:
+
+Gneiting, T., Sevcikova, H. and Percival, D. B. (2012). Estimators of fractal dimension: Assessing the smoothness of time series and spatial data. Statistical Science, 27(2), 247-277. (Version as technical report available at http://www.stat.washington.edu/research/reports/2010/tr577.pdf) 
+Jefferis, G. (2017). Read Windows Bitmap (BMP) Images. Disponivel em  https://cran.r-project.org/web/packages/bmp/bmp.pdf. Arquivo consultado em 20 de dezembro de 2017. 
+Sevcikova, H., Percival, D., Gneiting, T. (2015) Estimation of fractal dimensions. Disponivel em https://cran.r-project.org/web/packages/fractaldim/fractaldim.pdf. Arquivo consultado em 21 de dezembro de 2017.
+
+Examples:
+###############
+Exemplo
+###############
+#Arquivos de imagem .bmp com exemplos disponivel em https://github.com/kiasms/df_manchas_sp/blob/master/pasta.rar
+pasta = "diretorio_onde_estao_as_imagens" #Crie um objeto com o endereço da pasta onde estao as imagens
+df_mancha_sp(pasta) #Salve em um objeto ou copie o resultado que aparecera no console.
